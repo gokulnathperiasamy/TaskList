@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_horizontal_margin"
-    android:orientation="vertical">
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="4dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardMaxElevation="2dp">
 
-    <TextView
-        android:id="@+id/tv_task_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Book movie ticket for Kings Man - Golden Circle." />
+        android:layout_margin="4dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_row_updated"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="end"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="10sp"
-        tools:text="September 25, 2017, 18:10:00!" />
+        <TextView
+            android:id="@+id/tv_task_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Book movie ticket for Kings Man - Golden Circle." />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_row_updated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp"
+            tools:text="September 25, 2017, 18:10:00!" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
