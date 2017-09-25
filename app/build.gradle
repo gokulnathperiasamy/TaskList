@@ -8,6 +8,10 @@ def appVersionCode() {
     return 1
 }
 
+def appBaseName() {
+    return "TaskList"
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -17,7 +21,7 @@ android {
         targetSdkVersion 25
         versionCode appVersionCode()
         versionName appVersionName()
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", appBaseName())
     }
     signingConfigs {
         release {
