@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 
+def appVersionName() {
+    return "0.1"
+}
+
+def appVersionCode() {
+    return 1
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -7,14 +15,40 @@ android {
         applicationId "com.kpgn.tasklist"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode appVersionCode()
+        versionName appVersionName()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            storeFile file("keystore_tasklist.jks")
+            storePassword 'T@skL!st1357'
+            keyAlias 'TaskList'
+            keyPassword 'T@skL!st1357'
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def date = new Date();
+                    def formattedDate = date.format('yyyyMMddHHmm')
+                    output.outputFile = new File(output.outputFile.parent, output.outputFile.name.replace("-prod-release", "_Prod_Release_" + formattedDate))
+                }
+            }
+        }
+    }
+    productFlavors {
+        dev {
+            // Dev build
+        }
+
+        prod {
+            // Prod build
         }
     }
 }
