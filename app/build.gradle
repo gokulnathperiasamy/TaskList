@@ -64,7 +64,7 @@ android {
     }
 
     play {
-        track = 'beta'             // 'beta' or 'alpha' or 'production'
+        track = 'alpha'             // 'beta' or 'alpha' or 'production'
     }
 }
 
