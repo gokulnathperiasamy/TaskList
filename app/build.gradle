@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.triplet.play'
 
 def appVersionName() {
-    return "0.1"
+    return "0.3"
 }
 
 def appVersionCode() {
-    return 1
+    return 3
 }
 
 def appBaseName() {
@@ -15,6 +16,11 @@ def appBaseName() {
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    playAccountConfigs {
+        defaultAccountConfig {
+            jsonFile = file('google-play-android-developer.json')
+        }
+    }
     defaultConfig {
         applicationId "com.kpgn.tasklist"
         minSdkVersion 16
@@ -22,6 +28,7 @@ android {
         versionCode appVersionCode()
         versionName appVersionName()
         setProperty("archivesBaseName", appBaseName())
+        playAccountConfig = playAccountConfigs.defaultAccountConfig
     }
     signingConfigs {
         release {
@@ -54,6 +61,10 @@ android {
         prod {
             // Prod build
         }
+    }
+
+    play {
+        track = 'alpha' // or 'rollout' or 'beta' or 'alpha' or 'production'
     }
 }
 
