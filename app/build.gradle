@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.triplet.play'
 
 def appVersionName() {
-    return "0.5"
+    return "0.6"
 }
 
 def appVersionCode() {
-    return 5
+    return 6
 }
 
 def appBaseName() {
@@ -64,9 +64,7 @@ android {
     }
 
     play {
-        track = 'alpha'             // 'beta' or 'alpha' or 'production'
-        errorOnSizeLimit = false
-        uploadImages = true        // true/false when new images are added
+        track = 'beta'             // 'beta' or 'alpha' or 'production'
     }
 }
 
