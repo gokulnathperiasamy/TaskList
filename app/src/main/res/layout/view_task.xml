@@ -22,15 +22,35 @@
             android:layout_height="wrap_content"
             tools:text="Book movie ticket for Kings Man - Golden Circle." />
 
-        <TextView
-            android:id="@+id/tv_row_updated"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="12dp"
             android:gravity="end"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="10sp"
-            tools:text="September 25, 2017, 18:10:00!" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/added_on"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_row_updated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="10sp"
+                tools:text="September 25, 2017, 18:10:00!" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
