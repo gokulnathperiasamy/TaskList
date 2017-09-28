@@ -1,6 +1,11 @@
 machine:
     environment:
 
+general:
+  branches:
+    only:
+      - master # list of branches to build
+
 dependencies:
     pre:
             - echo y | android update sdk --no-ui --all --filter "tools,platform-tools,android-25"
