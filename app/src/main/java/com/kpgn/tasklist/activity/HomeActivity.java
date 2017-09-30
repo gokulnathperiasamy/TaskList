@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +36,9 @@ public class HomeActivity extends BaseActivity {
 
     @BindView(R.id.rv_task_list)
     RecyclerView mRvTaskList;
+
+    @BindView(R.id.task_list_empty_container)
+    View mTaskListEmpty;
 
     private List<Task> taskList = new ArrayList<>();
     private TasksAdapter tasksAdapter;
@@ -65,6 +69,39 @@ public class HomeActivity extends BaseActivity {
         mRvTaskList.setLayoutManager(mLayoutManager);
         mRvTaskList.setItemAnimator(new DefaultItemAnimator());
         mRvTaskList.setAdapter(tasksAdapter);
+        checkIfDataAvailable();
+        setRVSwipeListener();
+    }
+
+    private void checkIfDataAvailable() {
+        if (taskList == null || taskList.size() == 0) {
+            mTaskListEmpty.setVisibility(View.VISIBLE);
+            mRvTaskList.setVisibility(View.GONE);
+        } else {
+            mTaskListEmpty.setVisibility(View.GONE);
+            mRvTaskList.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setRVSwipeListener() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int position = viewHolder.getAdapterPosition();
+                taskList.remove(position);
+                tasksAdapter.notifyDataSetChanged();
+                checkIfDataAvailable();
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRvTaskList);
     }
 
     @Override
@@ -114,5 +151,6 @@ public class HomeActivity extends BaseActivity {
         task.setRowUpated(System.currentTimeMillis());
         taskList.add(task);
         tasksAdapter.notifyDataSetChanged();
+        checkIfDataAvailable();
     }
 }

@@ -17,7 +17,7 @@ dependencies:
 test:
     override:
         #assemble the apk if tests were successful
-        - ./gradlew clean assemble -PdisablePreDex  # publishApkProdRelease
+        - ./gradlew clean assemble publishApkProdRelease -PdisablePreDex  # publishApkProdRelease
 
         # copy the test results to the test results directory.
         - cp -r app/build/outputs $CIRCLE_ARTIFACTS

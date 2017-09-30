@@ -3,7 +3,6 @@ package com.kpgn.tasklist.view;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.kpgn.tasklist.R;
@@ -23,9 +22,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> {
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_task, parent, false);
-
-        return new TaskViewHolder(itemView);
+        return new TaskViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_task, parent, false));
     }
 
     @Override
