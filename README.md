@@ -1,4 +1,4 @@
-# Task List ![CircleCI](https://circleci.com/gh/gokulnathperiasamy/TaskList/tree/master.svg?style=svg)
+# Task List [![CircleCI](https://circleci.com/gh/gokulnathperiasamy/TaskList/tree/master.svg?style=svg)](https://circleci.com/gh/gokulnathperiasamy/TaskList/tree/master)
 
 > A sample Android application which publishes the APK generated in Google Play Store.
 
