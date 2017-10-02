@@ -2,5 +2,8 @@
     <string name="app_name">Task List</string>
 
     <string name="added_on">Added On:</string>
+    <string name="add_new_task">Add New Task</string>
+    <string name="confirm_delete">Do you want to delete task? \n\n%1$s</string>
     <string name="dialog_action_save">Save</string>
+    <string name="dialog_action_delete">Delete</string>
 </resources>

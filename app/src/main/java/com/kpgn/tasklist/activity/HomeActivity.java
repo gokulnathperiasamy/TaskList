@@ -81,6 +81,7 @@ public class HomeActivity extends BaseActivity {
             mTaskListEmpty.setVisibility(View.GONE);
             mRvTaskList.setVisibility(View.VISIBLE);
         }
+        tasksAdapter.notifyDataSetChanged();
     }
 
     private void setRVSwipeListener() {
@@ -93,15 +94,37 @@ public class HomeActivity extends BaseActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                int position = viewHolder.getAdapterPosition();
-                taskList.remove(position);
-                tasksAdapter.notifyDataSetChanged();
-                checkIfDataAvailable();
+                confirmAndDelete(viewHolder.getAdapterPosition());
             }
         };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(mRvTaskList);
+    }
+
+    private void confirmAndDelete(final int position) {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.confirm_delete, taskList.get(position).getTaskContent()))
+                .setIcon(R.mipmap.ic_warning)
+                .setPositiveButton(getString(R.string.dialog_action_delete), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                        deleteItem(position);
+                    }
+                })
+                .setNegativeButton(getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        checkIfDataAvailable();
+                    }
+                })
+                .show();
+    }
+
+    private void deleteItem(int position) {
+        taskList.remove(position);
+        checkIfDataAvailable();
     }
 
     @Override
@@ -132,7 +155,7 @@ public class HomeActivity extends BaseActivity {
         linearLayout.setPadding(60, 20, 60, 0);
 
         alert.setView(linearLayout);
-        alert.setTitle("Add New Task");
+        alert.setTitle(getString(R.string.add_new_task));
         alert.setPositiveButton(getString(R.string.dialog_action_save), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String taskString = editText.getText().toString().trim();
