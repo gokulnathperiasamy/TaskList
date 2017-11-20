@@ -1,6 +1,6 @@
 # Task List [![CircleCI](https://circleci.com/gh/gokulnathperiasamy/TaskList/tree/master.svg?style=shield)](https://circleci.com/gh/gokulnathperiasamy/TaskList/tree/master)
 
-> A sample Android application which publishes the APK generated in Google Play Store.
+> A sample Android application which publishes the APK generated in Google Play Store using CI/CD Process.
 
 ###### Libraries Used:
 
