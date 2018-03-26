@@ -1,21 +1,20 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.triplet.play'
 
-def appVersionName() {
-    return "0.9"
+static def appVersionName() {
+    return "0.10"
 }
 
-def appVersionCode() {
-    return 9
+static def appVersionCode() {
+    return 10
 }
 
-def appBaseName() {
+static def appBaseName() {
     return "TaskList"
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
     playAccountConfigs {
         defaultAccountConfig {
             jsonFile = file('google-play-android-developer.json')
@@ -24,7 +23,7 @@ android {
     defaultConfig {
         applicationId "com.kpgn.tasklist"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode appVersionCode()
         versionName appVersionName()
         setProperty("archivesBaseName", appBaseName())
@@ -48,11 +47,12 @@ android {
                 variant.outputs.each { output ->
                     def date = new Date();
                     def formattedDate = date.format('yyyyMMddHHmm')
-                    output.outputFile = new File(output.outputFile.parent, output.outputFile.name.replace("-prod-release", "_Prod_Release_" + formattedDate))
+                    output.outputFileName = new File(output.outputFile.parent, output.outputFileName.replace("-prod-release", "_Prod_Release_" + formattedDate))
                 }
             }
         }
     }
+    flavorDimensions "default"
     productFlavors {
         dev {
             // Dev build
@@ -69,19 +69,18 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
 
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-
-    compile 'com.android.support:cardview-v7:25.3.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
